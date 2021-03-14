@@ -8,6 +8,7 @@ excluindo o primeiro caractere (/). Por exemplo, para a requisição "Stranger T
 sua função deve devolver 'img/strangerthings/stranger-things.jpg'.
 """
 def extract_route(request):
+    print("request: {}".format(request))
     return request.split()[1][1:]
 
 
@@ -23,8 +24,8 @@ def read_file(path):
     abrir_texto = ['.txt', '.html', '.css', '.js']
     
     if file_extension in abrir_texto:
-        with open(path, 'rt') as arquivo:
-            return arquivo.read().encode()
+        with open(path, 'rt', encoding='utf-8') as arquivo:
+            return arquivo.read().encode(encoding='utf-8')
     else:
         with open(path, 'rb') as arquivo:
             return arquivo.read()
@@ -38,7 +39,7 @@ enviado como argumento). Dica: já existe uma função Python para isso (e você
 
 """
 def load_data(json_file):
-    with open('data/' + json_file) as json_path: 
+    with open('data/' + json_file, encoding='utf-8') as json_path: 
         data = json.load(json_path) 
 
     return data
@@ -61,13 +62,11 @@ https://docs.python.org/3/tutorial/controlflow.html#default-argument-values).
 """
 
 def build_response(body='', code=200, reason='OK', headers=''):
-    response = 'HTTP/1.1 ' + (' '.join([str(code), reason]))
+    response = 'HTTP/1.1 ' + str(code) + ' ' + reason
     
-    if headers == '':
+    if len(headers) == 0:
         response += '\n\n' + body
     else:
         response += '\n' + headers + '\n\n' + body
 
-    print('Response: ' + response)
-    
-    return response.encode()
+    return response.encode(encoding='utf-8')

@@ -8,29 +8,24 @@ from database import Database, Note
 db = Database("notes")
 
 
-def create_note(chave, valor):
-    id = None
-    title = chave 
-    content = valor
-
-    return Note(id, title, content)
-
-
-def post_into_note(corpo):
+def post_into_note(corpo):  
     new_note = []
     for chave_valor in corpo.split('&'):
         unquote = urllib.parse.unquote_plus(chave_valor).split('=')
         print('Unquote: {}'.format(unquote))
-        valor = unquote[1]
-        new_note.append(valor)
 
-    return create_note(new_note[0], new_note[1])
+        if unquote[0] == 'deleteNote':
+            db.delete(unquote[1])
+            return None
+        
+        else:
+            valor = unquote[1]
+            print('Valor: {}'.format(valor))
+            new_note.append(valor)
 
+            print("New note: {}".format(new_note))
 
-# Filling the table
-for valores in load_data('notes.json'):
-    db.add(create_note(valores['titulo'], valores['detalhes']))
-
+    return Note(new_note[0], new_note[1], new_note[2])
 
 
 def index(request):
@@ -43,8 +38,18 @@ def index(request):
         partes = request.split('\n\n')
         corpo = partes[1]
 
+        print("Corpo = {}".format(corpo))
         note = post_into_note(corpo)
-        db.add(note)
+
+        if note is None:
+            print("Entroooooooooooooooooooooooooooooou")
+            return build_response(code=303, reason='See Other', headers='Location: /')
+
+        else:
+            if note.id == 'None':
+                db.add(note)
+            else:
+                db.update(note) # Importante para editar e ecluir uma nota
 
         return build_response(code=303, reason='See Other', headers='Location: /')
 
@@ -54,9 +59,9 @@ def index(request):
         # Cria uma lista de <li>'s para cada anotação
         # Se tiver curiosidade: https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions
         notes_li = [
-            note_template.format(title=dados.title, details=dados.content)
+            note_template.format(id=dados.id, title=dados.title, details=dados.content)
             for dados in all_notes
         ]
         notes = '\n'.join(notes_li)
 
-        return build_response() + load_template('index.html').format(notes=notes).encode()
+        return build_response() + load_template('index.html').format(notes=notes).encode(encoding='utf-8')

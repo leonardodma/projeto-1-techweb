@@ -22,20 +22,25 @@ Algumas informações úteis e dicas:
   - Sombra: https://codepen.io/sdthornton/pen/wBZdXq
  */
 
+ @import url("https://fonts.googleapis.com/css?family=Inconsolata:400,700");
+
+
 html,
 body {
   font-family: "Roboto", sans-serif;
+  background-color: #EFE2BA;
 }
 
 /* Você pode usar o CSS comentado abaixo, se ajudar */
 /* Fonte: https://codepen.io/CrisWoler/pen/ogXBLj */
 
+
 .appbar {
-	background-color: #ecd551f8;	
+	background-color: #D79922;	
 	display: flex;
 	flex-direction: row;
 	align-content: center;
-	box-shadow: 0 1px 24px 0 rgba(0, 0, 0, 0.75);
+	box-shadow: 0 1px 24px 0 rgba(32, 32, 32, 0.75);
 	margin-bottom: 1rem;
 }
 
@@ -58,7 +63,8 @@ body {
   margin-top: 2rem;
   margin-bottom: 2rem;
   width: 35%;
-  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.75);
+  background-color: white;
+  box-shadow: 0 5px 10px 0 rgba(32, 32, 32, 0.75);
   border: none;
   
 } 
@@ -71,17 +77,17 @@ body {
 }
 
 .form-card-title{
+  font-family: 'Roboto', sans-serif;
   font-size: auto;
   margin: 1rem;
   border:none;
 }
 
-.autoresize{
+.form-card-details{
   font-family: 'Roboto', sans-serif;
   font-size: auto;
-  resize:none;
+  margin: 1rem;
   border:none;
-  margin-left: 1rem;
 }
 
 .btn {
@@ -94,9 +100,9 @@ body {
   border-width: 0;
   outline: none;
   border-radius: 2px;
-  box-shadow: 0 1px 4px rgba(0, 0 , 0, 0.6);
+  box-shadow: 0 1px 4px rgba(32, 32, 32, 0.75);
 
-  background-color: #f7d736;
+  background-color: white;
 
   transition: background-color 0.3s;
 
@@ -105,7 +111,7 @@ body {
 
 /* --------------------------------------CARTÕES--------------------------------------*/
 .card-container{
-  margin: 1.5rem;
+  margin: 1rem;
   display:flex;
   flex-wrap:wrap;
   justify-content: space-around;
@@ -122,21 +128,19 @@ body {
   margin-top: 1rem;
   margin-bottom: 1rem;
 
-  width: 25%;
+  width: 50%;
 
-	min-height: 8rem;
-  max-width: 12rem;
+	min-height: 12rem;
+  max-width: 18rem;
 
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.75);
+  box-shadow: 0 1px 5px 0 rgba(32, 32, 32, 0.75);
   border: none;
-  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.75);
 }
 
 .card-title {
   font-family: 'Permanent Marker', cursive;
   font-weight: bold;
   font-size: 1rem;
-  margin-top: -1.5rem;
   margin-left: 0.4rem;
 }
 
@@ -148,6 +152,79 @@ body {
 } 
 
 
+/* --------------------------------------Botão de Excluir--------------------------------------*/
+.close-container{
+  position: relative;
+  left: 85%;
+  bottom: 10%;
+  width: 50px;
+  cursor: pointer;
+}
+
+.leftright{
+  height: 2px;
+  width: 25px;
+  position: absolute;
+  margin-top: 12px;
+  background-color: #F4A259;
+  border-radius: 1px;
+  transform: rotate(45deg);
+  transition: all .3s ease-in;
+}
+
+.rightleft{
+  height: 2px;
+  width: 25px;
+  position: absolute;
+  margin-top: 12px;
+  background-color: #F4A259;
+  border-radius: 1px;
+  transform: rotate(-45deg);
+  transition: all .3s ease-in;
+}
+
+.close{
+  /*margin: 30px 5px 0 10px;*/
+  margin-top: 30px;
+  right: 30%;
+  position: absolute;
+
+  color: white;
+  font-family: Helvetica, Arial, sans-serif; 
+  font-size: .6em;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: all .3s ease-in;
+  opacity: 0;
+}
+
+.close-container:hover .leftright{
+  transform: rotate(-45deg);
+  background-color: #F25C66;
+}
+.close-container:hover .rightleft{
+  transform: rotate(45deg);
+  background-color: #F25C66;
+}
+.close-container:hover label{
+  opacity: 1;
+}
+
+
+/* --------------------------------------Botão de Editar-----------------------------------------*/
+.edit-content{
+  width: auto; 
+  position: absolute;
+  left: 60%;
+  bottom: 81%;
+
+}
+
+/* -----------------------------------------------------------------------------------------------*/
+
+.ocult {
+	display: none;
+}
 
 .btn > * {
   position: relative;
@@ -184,64 +261,64 @@ body {
 
 
 .card-rotation-1  {
-  background-color: #abe9c1;
+  background-color: #C5CBE3;
   transform: rotate(3deg);
   
 }
 .card-rotation-2  {
-  background-color: #ef89ba;
+  background-color: #F13C20;
   transform: rotate(6deg);
 }
 .card-rotation-3  {
-  background-color: #fae890;
+  background-color: #F13C20;
   transform: rotate(9deg);
 }
 .card-rotation-4  {
-  background-color: #9de0f5;
+  background-color: #C5CBE3;
   transform: rotate(-3deg);
 }
 
 .card-rotation-5  {
-  background-color: #abe9c1;
+  background-color: #F13C20;
   transform: rotate(-6deg);
 }
 .card-rotation-6  {
-  background-color:  #ef89ba;
+  background-color:  #4056A1;
   transform: rotate(-9deg);
 }
 .card-rotation-7  {
-  background-color: #fae890;
+  background-color: #4056A1;
   transform: rotate(3deg);
 }
 .card-rotation-8  {
-  background-color:  #9de0f5;
+  background-color:  #4056A1;
   transform: rotate(6deg);
 }
 .card-rotation-9  {
-  background-color: #abe9c1;
+  background-color: #F13C20;
   transform: rotate(9deg);
 }
 .card-rotation-10 {
-  background-color: #ef89ba;
+  background-color: #4056A1;
   transform: rotate(-3deg);
 }
 .card-rotation-11 {
-  background-color: #ead3a7;
+  background-color: #C5CBE3;
   transform: rotate(-6deg);
 }
 .card-rotation-12 {
-  background-color: #9de0f5;
+  background-color: #C5CBE3;
   transform: rotate(-9deg);
 }
 .card-rotation-13 {
-  background-color: #abe9c1;
+  background-color: #F13C20;
   transform: rotate(3deg);
 }
 .card-rotation-14 {
-  background-color: #ef89ba;
+  background-color: #C5CBE3;
   transform: rotate(6deg);
 }
 .card-rotation-15 {
-  background-color: #fae890;
+  background-color: #F13C20;
   transform: rotate(9deg);
 }

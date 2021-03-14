@@ -1,3 +1,25 @@
+// Código para deletar card 
+function deleteCard(id) {
+	document.getElementsByName('deleteCard-' + id)[0].submit()
+}
+
+// Código para editar card
+function editCard(id) {
+  var title = document.getElementsByName('title-' + id)[0].innerText
+  var content = document.getElementsByName('content-' + id)[0].innerText
+
+
+  document.getElementsByName('ID')[0].value = id
+  document.getElementsByName('titulo')[0].value = title
+	document.getElementsByName('detalhes')[0].value = content
+}
+
+
+// Código do botão de Editar
+
+
+
+// Código do Professor para Rotação dos Cards
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);

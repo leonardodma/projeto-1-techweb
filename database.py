@@ -38,11 +38,11 @@ class Database:
         self.conn.commit()
     
     def delete(self, note_id):
-        self.delete = """
+        self.content = """
                         DELETE FROM note 
                         WHERE id = {}""".format(note_id)
 
-        self.conn.execute(self.delete)
+        self.conn.execute(self.content)
         self.conn.commit()     
 
     def get_all(self):
@@ -54,6 +54,7 @@ class Database:
             self.note_list.append(note_obj)
         
         return self.note_list
+
     
 
 class Note:
