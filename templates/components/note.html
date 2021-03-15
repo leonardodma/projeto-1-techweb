@@ -1,5 +1,8 @@
 <div class="card">
-    <button class="edit-content" onclick="editCard({id})">Editar</button>
+    <a class="edit-content" onclick="editCard({id})">
+        <img class="img_edit" src="img/pencil.png" alt="Botão de Editar">
+    </a>
+
     
     <a class="close-container" onclick="deleteCard({id})">
         <div class="leftright"></div>
@@ -7,14 +10,14 @@
         <label class="close">Delete</label>
     </a>
 
-    <h3 class="card-title" name="title-{id}">{title}</h3>
+    <h3 class="card-title" name="title{id}">{title}</h3>
 
     <div class="card-content">
-        <p name="content-{id}">{details}</p>
+        <p name="content{id}">{details}</p>
     </div>
     
 
-    <form name="deleteCard-{id}" method="post">
+    <form name="deleteCard{id}" method="post">
         <input type="hidden" name="deleteNote" value="{id}" /> 
     </form>
 

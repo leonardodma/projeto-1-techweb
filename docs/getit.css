@@ -102,7 +102,7 @@ body {
   border-radius: 2px;
   box-shadow: 0 1px 4px rgba(32, 32, 32, 0.75);
 
-  background-color: white;
+  background-color: #D79922;
 
   transition: background-color 0.3s;
 
@@ -156,7 +156,7 @@ body {
 .close-container{
   position: relative;
   left: 85%;
-  bottom: 10%;
+  bottom: 30%;
   width: 50px;
   cursor: pointer;
 }
@@ -213,11 +213,18 @@ body {
 
 /* --------------------------------------Botão de Editar-----------------------------------------*/
 .edit-content{
-  width: auto; 
-  position: absolute;
-  left: 60%;
-  bottom: 81%;
+  position: relative;
+  left: 70%;
+  bottom: 5%;
+}
 
+.img_edit{
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.img_edit:hover{
+  background: #EFE2BA;
 }
 
 /* -----------------------------------------------------------------------------------------------*/

@@ -1,17 +1,18 @@
 // Código para deletar card 
 function deleteCard(id) {
-	document.getElementsByName('deleteCard-' + id)[0].submit()
+  // Mandar enviar o form com nome deleteCard{id}
+	document.getElementsByName('deleteCard' + id)[0].submit()
 }
 
 // Código para editar card
 function editCard(id) {
-  var title = document.getElementsByName('title-' + id)[0].innerText
-  var content = document.getElementsByName('content-' + id)[0].innerText
+  // Atualizar os valores dos botões 
+  document.getElementsByName('button')[0].innerText = 'Completar Edição'
 
-
+  // Mandar um Post com o ID do Cartão que o usuário clicou para editar.
   document.getElementsByName('ID')[0].value = id
-  document.getElementsByName('titulo')[0].value = title
-	document.getElementsByName('detalhes')[0].value = content
+  document.getElementsByName('titulo')[0].value = document.getElementsByName('title' + id)[0].innerText
+	document.getElementsByName('detalhes')[0].value = document.getElementsByName('content' + id)[0].innerText
 }
 
 
