@@ -8,7 +8,7 @@ excluindo o primeiro caractere (/). Por exemplo, para a requisição "Stranger T
 sua função deve devolver 'img/strangerthings/stranger-things.jpg'.
 """
 def extract_route(request):
-    print("request: {}".format(request))
+    # print("request: {}".format(request))
     return request.split()[1][1:]
 
 

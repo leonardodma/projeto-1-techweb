@@ -1,7 +1,9 @@
 import socket
 from pathlib import Path
-from utils import extract_route, read_file, build_response
+from utils import extract_route, read_file, build_response, load_template
 from views import index
+import os.path
+
 
 CUR_DIR = Path(__file__).parent
 SERVER_HOST = '0.0.0.0'
@@ -18,21 +20,44 @@ while True:
     client_connection, client_address = server_socket.accept()
 
     request = client_connection.recv(1024).decode()
-    print(request)
+    # print(request)
 
+    
     if request:
+    
+        route_list = []
+        t_or_f = []
         route = extract_route(request)
+        existe = os.path.isfile(route) 
 
-        filepath = CUR_DIR / route
-        if filepath.is_file():
-            response = build_response() + read_file(filepath)
-        elif route == '':
-            response = index(request)
-        else:
-            response = build_response()
+        route_list.append(route_list)
+        t_or_f.append(existe)
+    
 
+    lista_checagem = t_or_f[1:-1]
+    print(lista_checagem)
+    continua = True
+    for valor in lista_checagem:
+        if valor == False:
+            continua = False
+        
+    if continua:
+        for route in route_list:
+            filepath = CUR_DIR / route
+            print(f'filepath: {filepath}')
+            if filepath.is_file():
+                response = build_response() + read_file(filepath)
+            elif route == '':
+                response = index(request)
+            else:
+                response = build_response()
+
+            client_connection.sendall(response)
+
+    else:
+        response = build_response() + load_template('404.html').encode(encoding='utf-8')
         client_connection.sendall(response)
-
+    
     client_connection.close()
 
 server_socket.close()

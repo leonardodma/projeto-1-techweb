@@ -7,6 +7,7 @@ from database import Database, Note
 
 db = Database("notes")
 
+# return build_response() + load_template('404.html').encode(encoding='utf-8')
 
 def post_into_note(corpo):  
     new_note = []
@@ -20,10 +21,8 @@ def post_into_note(corpo):
         
         else:
             valor = unquote[1]
-            print('Valor: {}'.format(valor))
             new_note.append(valor)
 
-            print("New note: {}".format(new_note))
 
     return Note(new_note[0], new_note[1], new_note[2])
 
@@ -36,13 +35,13 @@ def index(request):
         request = request.replace('\r', '')  # Remove caracteres indesejados
         # Cabeçalho e corpo estão sempre separados por duas quebras de linha
         partes = request.split('\n\n')
+        print("Partes = {}".format(partes))
         corpo = partes[1]
 
         print("Corpo = {}".format(corpo))
         note = post_into_note(corpo)
 
         if note is None:
-            print("Entroooooooooooooooooooooooooooooou")
             return build_response(code=303, reason='See Other', headers='Location: /')
 
         else:
@@ -55,6 +54,7 @@ def index(request):
 
 
     else:
+
         all_notes = db.get_all()
         # Cria uma lista de <li>'s para cada anotação
         # Se tiver curiosidade: https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions
@@ -64,4 +64,5 @@ def index(request):
         ]
         notes = '\n'.join(notes_li)
 
+        
         return build_response() + load_template('index.html').format(notes=notes).encode(encoding='utf-8')
