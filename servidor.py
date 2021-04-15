@@ -22,42 +22,23 @@ while True:
     request = client_connection.recv(1024).decode()
     # print(request)
 
-    
     if request:
-    
-        route_list = []
-        t_or_f = []
         route = extract_route(request)
-        existe = os.path.isfile(route) 
 
-        route_list.append(route_list)
-        t_or_f.append(existe)
-    
-
-    lista_checagem = t_or_f[1:-1]
-    print(lista_checagem)
-    continua = True
-    for valor in lista_checagem:
-        if valor == False:
-            continua = False
-        
-    if continua:
-        for route in route_list:
-            filepath = CUR_DIR / route
-            print(f'filepath: {filepath}')
-            if filepath.is_file():
-                response = build_response() + read_file(filepath)
-            elif route == '':
+        filepath = CUR_DIR / route
+        print(f'filepath: {filepath}')
+        if filepath.is_file():
+            response = build_response() + read_file(filepath)
+        else:
+            if route == ' ':
                 response = index(request)
             else:
-                response = build_response()
+                print('Entrei no else')
+                response = build_response() + load_template('404.html').encode(encoding='utf-8')
 
-            client_connection.sendall(response)
-
-    else:
-        response = build_response() + load_template('404.html').encode(encoding='utf-8')
         client_connection.sendall(response)
-    
+
+
     client_connection.close()
 
 server_socket.close()
